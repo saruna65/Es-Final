@@ -1,0 +1,107 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Iresha Food Products</title>
+    <link rel="icon" type="image/svg" href="~/assetsnew/iresha.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- Material Kit CSS -->
+    <link href="assetsnew/css/material-kit.css?v=2.0.4" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+<style>
+    * {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+
+    .backg {
+        background-image: url('/assetsnew/Background.jpg');
+        background-size: cover;
+        background-position: center;
+        
+    }
+
+    .nav-link:hover {
+        /* Add your hover styles here */
+        color: blue;
+        text-decoration: underline;
+    }
+
+</style>
+ 
+</head>
+
+<body class="backg">
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="margin-top: -50px; position: fixed; top: 50px; right: 0; left: 0; height: 30px; z-index: 1000;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://www.ireshafoods.lk/">
+                <img src="~/assets/Ireshalogo.svg" alt="Bootstrap" width="100" height="40">
+            </a>
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    @Html.ActionLink("CUSTOMERS", "Index", "Customers", new { area = "" }, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("INVOICE", "Index", "Invoice", new { area = "" }, new { @class = "nav-link" })
+                </li>
+                @if (Session["UserName"].ToString() == "Admin")
+                {
+                    <li class="nav-item">
+                        <form action="@Url.Action("Index", "Chart")" method="post">
+                            <button type="submit" class="btn btn-outline-success me-2" type="button" style="font-size:12px;">Admin Dashboard</button>
+                        </form>
+                    </li>
+                }
+            </ul>
+            @if (Session["UserName"] != null)
+            {
+               
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNav" style="margin-left:700px;">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link"><i class="fas fa-user"></i> &nbsp; @Session["UserName"].ToString()</a>
+                            </li>
+                            <li class="nav-item">
+                                <form action="@Url.Action("Logout", "Login")" method="post">
+                                    <button type="submit" class="btn btn-outline-danger me-2" type="button" style="font-size:12px;">Log out</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                
+            }
+            
+
+        </div>
+    </nav>
+    <div class="container">
+        <div class="section text-center">
+
+            @RenderBody()
+
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+
+
+</body>
+
+</html>

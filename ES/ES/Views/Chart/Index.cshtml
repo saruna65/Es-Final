@@ -1,0 +1,190 @@
+﻿@model ES.Models.ChartDataModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg" href="~/assetsnew/iresha.svg">
+    <title>Iresha Foods Products</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .backg {
+            background-image: url('/assetsnew/b4.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .navbar-nav .nav-link {
+            color: grey;
+        }
+            .navbar-nav .nav-link:hover {
+                color: #47A44B;
+            }
+
+     
+    </style>
+</head>
+<body class="backg">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color:white;">
+        <a class="navbar-brand" href="https://www.ireshafoods.lk/">
+            <img src="~/assets/Ireshalogo.svg" alt="Bootstrap" width="100" height="40">
+        </a>
+
+        <ul class="navbar-nav">
+            <li class="nav-item" style="color: gray; margin-right: 20px;">
+                @Html.ActionLink("CUSTOMERS", "Index", "Customers", new { area = "" }, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item" style="color: gray; margin-right: 20px;">
+                @Html.ActionLink("INVOICE", "Index", "Invoice", new { area = "" }, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("USER MANAGEMENT", "Index", "User", new { area = "" }, new { @class = "nav-link", onclick = "openPopup1(this.href); return false;" })
+            </li>
+
+        </ul>
+        @if (Session["UserName"] != null)
+        {
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item" >
+                        <a class="nav-link"><i class="fas fa-user"></i> &nbsp; @Session["UserName"].ToString()</a>
+                    </li>
+                    <li class="nav-item" >
+                        <form action="@Url.Action("Logout", "Login")" method="post">
+                            <button type="submit" class="btn btn-outline-danger me-2" type="button">Log out</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        }
+
+
+    </nav>
+    <br /><br />
+    <div class="container" style="padding: 20px; ">
+        <div class="row" style="margin-bottom: 20px; background-color: rgba(255, 255, 255, 0.8); border-radius: 20px 20px 20px 20px; box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.30);">
+            <div class="col-sm-6" style=" padding: 20px; border-radius: 20px 0px 0px 20px;">
+                <h3 style="text-align:center; color:black">Dashboard</h3>
+                <br /><br />
+                <div class="card bg-light mb-3"  style=" border-radius: 20px 20px 20px 20px;" >
+                    <div class="card-body" style="background-color: white; border-radius: 20px 20px 20px 20px;">
+                        <h5 class="card-title">NO OF CUSTOMERS&nbsp;&nbsp;&nbsp;<i class="fas fa-users"></i></h5><br />
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            <span id="counter">0</span>
+                        </h6>
+                    </div>
+                </div>
+                <br />
+                <div class="card bg-light mb-3" style=" border-radius: 20px 20px 20px 20px;">
+                    <div class="card-body" style="background-color: white; border-radius: 20px 20px 20px 20px;">
+                        <h5 class="card-title">NO OF ORDERS&nbsp;&nbsp;&nbsp;<i class="fas fa-box"></i></h5><br />
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            <span id="ordercounter">0</span>
+                        </h6>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-6" style=" padding: 20px; border-radius: 0px 20px 20px 0px; ">
+                <h3 style="text-align:center; color:black">Sales of products</h3>
+                <br />
+                <canvas id="myChart" class="mx-auto" style="width:80%"> </canvas>
+            </div>
+        </div>
+    </div>
+  
+
+    <script>
+        function openPopup1(url) {
+            var width = 1000;
+            var height = 560;
+            var left = (window.innerWidth - width) / 2;
+            var top = (window.innerHeight - height) / 2;
+            var options = "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top + ",location=0";
+            var popup = window.open("", "popup", options);
+            popup.document.write("<html><head><title>User Authentication</title></head><body style='margin: 0; padding: 0;'>");
+            popup.document.write("<iframe id='myFrame' src='" + url + "' style='border: none; width: 100%; height: 100%;'></iframe>");
+            popup.document.write("</body></html>");
+
+        }
+
+    </script>
+    <script>
+    var labels = @Html.Raw(Json.Encode(Model.Categories));
+    var counts = @Html.Raw(Json.Encode(Model.Data));
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: counts,
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(153, 102, 255)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 77, 166)'
+                ],
+                hoverOffset:35,
+            }]
+        },
+        options: {
+            layout: {
+                padding: {
+                    bottom:15
+                    }
+                }
+
+        }
+    });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        var count = 0;
+        var counterElement = document.getElementById("counter");
+        counterElement.style.fontSize = "25px";
+        function incrementCount() {
+            count++;
+            counterElement.innerHTML = count;
+            if (count == @Model.CustomerCount) {
+                clearInterval(counterInterval);
+            }
+        }
+        var counterInterval = setInterval(incrementCount, 250);
+    </script>
+    <script>
+    var count1 = 0;
+    var orderCounterElement = document.getElementById("ordercounter");
+    orderCounterElement.style.fontSize = "25px";
+    function incrementOrderCount() {
+        count1++;
+        orderCounterElement.innerHTML = count1;
+        if (count1 == @Model.TotalOrders) {
+            clearInterval(orderCounterInterval);
+        }
+    }
+    var orderCounterInterval = setInterval(incrementOrderCount, 250);
+    </script>
+
+   
+</body>
+</html>
+

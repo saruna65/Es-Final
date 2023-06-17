@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ES.Models.DBModelPie.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Productname" Type="nvarchar(max)" />
+    <Property Name="Qty" Type="int" />
+    <Property Name="UnitPrice" Type="float" />
+    <Property Name="Productname2" Type="nvarchar(max)" />
+    <Property Name="Qty2" Type="int" />
+    <Property Name="UnitPrice2" Type="float" />
+    <Property Name="Productname3" Type="nvarchar(max)" />
+    <Property Name="Qty3" Type="int" />
+    <Property Name="UnitPrice3" Type="float" />
+    <Property Name="Productname4" Type="nvarchar(max)" />
+    <Property Name="Qty4" Type="int" />
+    <Property Name="UnitPrice4" Type="float" />
+    <Property Name="Productname5" Type="nvarchar(max)" />
+    <Property Name="Qty5" Type="int" />
+    <Property Name="UnitPrice5" Type="float" />
+    <Property Name="Productname6" Type="nvarchar(max)" />
+    <Property Name="Qty6" Type="int" />
+    <Property Name="UnitPrice6" Type="float" />
+  </EntityType>
+  <EntityContainer Name="ESModelsDBModelPieStoreContainer">
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

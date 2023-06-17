@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ES.Models.DBModelPie.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Productname" Type="nvarchar(max)" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="UnitPrice" Type="float" />
+          <Property Name="Productname2" Type="nvarchar(max)" />
+          <Property Name="Qty2" Type="int" />
+          <Property Name="UnitPrice2" Type="float" />
+          <Property Name="Productname3" Type="nvarchar(max)" />
+          <Property Name="Qty3" Type="int" />
+          <Property Name="UnitPrice3" Type="float" />
+          <Property Name="Productname4" Type="nvarchar(max)" />
+          <Property Name="Qty4" Type="int" />
+          <Property Name="UnitPrice4" Type="float" />
+          <Property Name="Productname5" Type="nvarchar(max)" />
+          <Property Name="Qty5" Type="int" />
+          <Property Name="UnitPrice5" Type="float" />
+          <Property Name="Productname6" Type="nvarchar(max)" />
+          <Property Name="Qty6" Type="int" />
+          <Property Name="UnitPrice6" Type="float" />
+        </EntityType>
+        <EntityContainer Name="ESModelsDBModelPieStoreContainer">
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ES.Models.DBModelPie" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Productname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="UnitPrice" Type="Double" />
+          <Property Name="Productname2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Qty2" Type="Int32" />
+          <Property Name="UnitPrice2" Type="Double" />
+          <Property Name="Productname3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Qty3" Type="Int32" />
+          <Property Name="UnitPrice3" Type="Double" />
+          <Property Name="Productname4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Qty4" Type="Int32" />
+          <Property Name="UnitPrice4" Type="Double" />
+          <Property Name="Productname5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Qty5" Type="Int32" />
+          <Property Name="UnitPrice5" Type="Double" />
+          <Property Name="Productname6" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Qty6" Type="Int32" />
+          <Property Name="UnitPrice6" Type="Double" />
+        </EntityType>
+        <EntityContainer Name="EntitiesPie" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Products" EntityType="Self.Product" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ESModelsDBModelPieStoreContainer" CdmEntityContainer="EntitiesPie">
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="ES.Models.DBModelPie.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Productname" ColumnName="Productname" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Productname2" ColumnName="Productname2" />
+                <ScalarProperty Name="Qty2" ColumnName="Qty2" />
+                <ScalarProperty Name="UnitPrice2" ColumnName="UnitPrice2" />
+                <ScalarProperty Name="Productname3" ColumnName="Productname3" />
+                <ScalarProperty Name="Qty3" ColumnName="Qty3" />
+                <ScalarProperty Name="UnitPrice3" ColumnName="UnitPrice3" />
+                <ScalarProperty Name="Productname4" ColumnName="Productname4" />
+                <ScalarProperty Name="Qty4" ColumnName="Qty4" />
+                <ScalarProperty Name="UnitPrice4" ColumnName="UnitPrice4" />
+                <ScalarProperty Name="Productname5" ColumnName="Productname5" />
+                <ScalarProperty Name="Qty5" ColumnName="Qty5" />
+                <ScalarProperty Name="UnitPrice5" ColumnName="UnitPrice5" />
+                <ScalarProperty Name="Productname6" ColumnName="Productname6" />
+                <ScalarProperty Name="Qty6" ColumnName="Qty6" />
+                <ScalarProperty Name="UnitPrice6" ColumnName="UnitPrice6" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

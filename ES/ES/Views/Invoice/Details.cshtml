@@ -1,0 +1,339 @@
+﻿@model ES.Models.Order
+@{
+    Layout = null;
+}
+@{
+    ViewBag.Title = "Details";
+}
+<!DOCTYPE html>
+
+<head>
+    <title>Iresha Food Products| Invoice | @Html.DisplayFor(model => model.OrderId)</title>
+    <link rel="icon" type="image/svg" href="~/assets/Ireshalogo.svg">
+
+    <link rel="stylesheet" type="text/css" href="~/assets/css/invoice.css">
+</head>
+<section class="print-button">
+    <button onclick="window.print()"  id="print-btn">Print Invoice</button>
+</section>
+<br />
+<!-- The header element will appear on the top of each page of this invoice document. -->
+<header>
+    <div class="headerSection">
+        <!-- As a logo we take an SVG element and add the name in an standard H1 element behind it. -->
+        <div class="logoAndName">
+            <svg>
+                <img src="~/assets/Ireshalogo.svg" alt="My Image" width="100" height="50" style="margin-left:-100px;">
+
+            </svg>
+            <h1>Iresha Food Products PVT(LTD)</h1>
+
+        </div>
+        <!-- Details about the invoice are on the right top side of each page. -->
+        <div class="invoiceDetails">
+            <h2>Invoice #@Html.DisplayFor(model => model.OrderId)</h2>
+            <p>
+                <time datetime="@DateTime.Now.ToString("yyyy-MM-dd")">@DateTime.Now.ToString("MM/dd/yyyy")</time>
+            </p>
+        </div>
+    </div>
+    <!-- The two header rows are divided by an blue line, we use the HR element for this. -->
+    <hr />
+    <div class="headerSection">
+        <!-- The clients details come on the left side below the logo and company name. -->
+        <div>
+            <h3>Invoice to</h3>
+            <p>
+                <b>@Html.DisplayFor(model => model.CustomerName)</b>
+                <br />
+                <br />
+                @Html.DisplayFor(model => model.CustomerAddress)
+                <br />
+                <br />
+                @Html.DisplayFor(model => model.Phone)
+            </p>
+        </div>
+        <!-- Additional details can be placed below the invoice details. -->
+        <div>
+            <h3>Bill Date</h3>
+            <p>
+                <b>@Html.DisplayFor(model => model.OrderDate)</b>
+            </p>
+            <h3>Head Office</h3>
+            <p>
+                <b>No. 4/151, Palagama, Polgasowita, Sri Lanka<br />077-xxxxxxx</b>
+            </p>
+        </div>
+    </div>
+</header>
+
+<!-- The footer contains the company's website and address. To align the address details we will use flexbox in the CSS style. -->
+@*<footer>
+        <a href="https://companywebsite.com">
+
+        </a>
+        <a href="mailto:company@website.com">
+
+        </a>
+        <span>
+
+        </span>
+        <span>
+
+        </span>
+    </footer>*@
+<br />
+<br />
+<br />
+<!-- In the main section the table for the separate items is added. Also we add another table for the summary, so subtotal, tax and total amount. -->
+<main>
+    <table>
+        <!-- A THEAD element is used to ensure the header of the table is repeated if it consumes more than one page. -->
+        <thead>
+            <tr>
+                <th>Item Description</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <!-- The single invoice items are all within the TBODY of the table. -->
+        <tbody>
+            <tr>
+                <td>
+                    <b>@Html.DisplayFor(model => model.product.Productname)</b>
+                    <br />
+
+                <td id="num1">
+                    @Html.DisplayFor(model => model.product.Qty)
+                </td>
+                <td id="num2">
+                    @Html.DisplayFor(model => model.product.UnitPrice)
+                </td>
+                <td id="result1">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>@Html.DisplayFor(model => model.product.Productname2)</b>
+                    <br />
+
+                </td>
+                <td id="Qty2">
+                    @Html.DisplayFor(model => model.product.Qty2)
+                </td>
+                <td id="UnitPrice2">
+                    @Html.DisplayFor(model => model.product.UnitPrice2)
+                </td>
+                <td id="result2">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>@Html.DisplayFor(model => model.product.Productname3)</b>
+                    <br />
+
+                </td>
+                <td id="Qty3">
+                    @Html.DisplayFor(model => model.product.Qty3)
+                </td>
+                <td id="UnitPrice3">
+                    @Html.DisplayFor(model => model.product.UnitPrice3)
+                </td>
+                <td id="result3">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>@Html.DisplayFor(model => model.product.Productname4)</b>
+                    <br />
+
+                </td>
+                <td id="Qty4">
+                    @Html.DisplayFor(model => model.product.Qty4)
+                </td>
+                <td id="UnitPrice4">
+                    @Html.DisplayFor(model => model.product.UnitPrice4)
+                </td>
+                <td id="result4">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>@Html.DisplayFor(model => model.product.Productname5)</b>
+                    <br />
+
+                </td>
+                <td id="Qty5">
+                    @Html.DisplayFor(model => model.product.Qty5)
+                </td>
+                <td id="UnitPrice5">
+                    @Html.DisplayFor(model => model.product.UnitPrice5)
+                </td>
+                <td id="result5">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>@Html.DisplayFor(model => model.product.Productname6)</b>
+                    <br />
+
+                </td>
+                <td id="Qty6">
+                    @Html.DisplayFor(model => model.product.Qty6)
+                </td>
+                <td id="UnitPrice6">
+                    @Html.DisplayFor(model => model.product.UnitPrice6)
+                </td>
+                <td id="result6">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- The summary table contains the subtotal, tax and total amount. -->
+    <table class="summary">
+        <tr>
+            <th>
+                Subtotal
+            </th>
+            <td id="totalresult">
+            </td>
+        </tr>
+        <tr>
+            <th>
+                VAT
+            </th>
+            <td>
+                15%
+            </td>
+        </tr>
+        <tr class="total">
+            <th>
+                Total
+            </th>
+            <td id="total">
+            </td>
+        </tr>
+    </table>
+</main>
+<!-- Within the aside tag we will put the terms and conditions which shall be shown below the invoice table. -->
+<aside>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <!-- Before the terms and conditions we will add another blue divider line with the help of the HR tag. -->
+    <hr />
+    <div>
+        <div>
+            <b>Terms &amp; Conditions</b>
+            <p>
+                Please make payment within 30 days of issue of the invoice.
+            </p>
+        </div>
+        <div>
+
+        </div>
+    </div>
+</aside>
+
+<script>
+    var num1 = parseFloat(document.getElementById("num1").innerHTML);
+    var num2 = parseFloat(document.getElementById("num2").innerHTML);
+    var result = num1 * num2;
+    document.getElementById("result1").innerHTML = result.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    document.getElementById("result1").innerHTML = formattedResult;
+</script>
+<script>
+    var Qty2 = parseFloat(document.getElementById("Qty2").innerHTML);
+    var UnitPrice2 = parseFloat(document.getElementById("UnitPrice2").innerHTML);
+    if (Qty2 && UnitPrice2) {
+
+        var result = Qty2 * UnitPrice2;
+        document.getElementById("result2").innerHTML = result.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        document.getElementById("result2").innerHTML = formattedResult;
+    }
+</script>
+<script>
+    var Qty3 = parseFloat(document.getElementById("Qty3").innerHTML);
+    var UnitPrice3 = parseFloat(document.getElementById("UnitPrice3").innerHTML);
+    if (Qty3 && UnitPrice3) {
+
+        var result = Qty3 * UnitPrice3;
+        document.getElementById("result3").innerHTML = result.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        document.getElementById("result3").innerHTML = formattedResult;
+    }
+</script>
+<script>
+    var Qty4 = parseFloat(document.getElementById("Qty4").innerHTML);
+    var UnitPrice4 = parseFloat(document.getElementById("UnitPrice4").innerHTML);
+    if (Qty4 && UnitPrice4) {
+
+        var result = Qty4 * UnitPrice4;
+        document.getElementById("result4").innerHTML = result.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        document.getElementById("result4").innerHTML = formattedResult;
+    }
+</script>
+<script>
+    var Qty5 = parseFloat(document.getElementById("Qty5").innerHTML);
+    var UnitPrice5 = parseFloat(document.getElementById("UnitPrice5").innerHTML);
+    if (Qty5 && UnitPrice5) {
+
+        var result = Qty5 * UnitPrice5;
+        document.getElementById("result5").innerHTML = result.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        document.getElementById("result5").innerHTML = formattedResult;
+    }
+</script>
+<script>
+    var Qty6 = parseFloat(document.getElementById("Qty6").innerHTML);
+    var UnitPrice6 = parseFloat(document.getElementById("UnitPrice6").innerHTML);
+    if (Qty6 && UnitPrice6) {
+
+        var result = Qty6 * UnitPrice6;
+        document.getElementById("result6").innerHTML = result.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        document.getElementById("result6").innerHTML = formattedResult;
+    }
+</script>
+
+
+<script>
+    var result1 = document.getElementById("result1").innerHTML.trim();
+    var result2 = document.getElementById("result2").innerHTML.trim();
+    var result3 = document.getElementById("result3").innerHTML.trim();
+    var result4 = document.getElementById("result4").innerHTML.trim();
+    var result5 = document.getElementById("result5").innerHTML.trim();
+    var result6 = document.getElementById("result6").innerHTML.trim();
+
+    var totalresult = 0;
+    var VAT = 0;
+    var total = 0;
+
+    if (result1 !== "") {
+        totalresult += parseFloat(result1.replace(/,/g, ''));
+    }
+    if (result2 !== "") {
+        totalresult += parseFloat(result2.replace(/,/g, ''));
+    }
+    if (result3 !== "") {
+        totalresult += parseFloat(result3.replace(/,/g, ''));
+    }
+    if (result4 !== "") {
+        totalresult += parseFloat(result4.replace(/,/g, ''));
+    }
+    if (result5 !== "") {
+        totalresult += parseFloat(result5.replace(/,/g, ''));
+    }
+    if (result6 !== "") {
+        totalresult += parseFloat(result6.replace(/,/g, ''));
+    }
+
+    VAT = totalresult * 0.15;
+    total = totalresult + VAT;
+
+    document.getElementById("totalresult").innerHTML = "LKR " + totalresult.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    document.getElementById("total").innerHTML = "LKR " + total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+</script>

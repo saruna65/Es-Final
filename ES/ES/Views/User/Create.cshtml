@@ -1,0 +1,72 @@
+﻿@model ES.Models.Login
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bootstrap Template with Form</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+
+</head>
+<body>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <!-- Form -->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="card">
+                        <div class="card-header" style="background-color: #e3f2fd;">
+                            <h1 class="card-title" style="text-align:center">ADD USER</h1>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @type = "text", id = "name", placeholder = "Enter Name" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="form-group">
+                                <label for="uname">User Name</label>
+                                @Html.EditorFor(model => model.User_Name, new { htmlAttributes = new { @class = "form-control", @type = "text", id = "uname", placeholder = "Enter User Name" } })
+                                @Html.ValidationMessageFor(model => model.User_Name, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="form-group">
+                                <label for="pass">Password</label>
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @type = "password", id = "pass", placeholder = "Enter User Name" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="card-footer text-center" style="background-color: #e3f2fd;">
+                            <button type="submit" class="btn btn-outline-primary">Save</button><br /><br />
+                            @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-outline-warning btn-sm ", @style = "margin-top:5px; margin-bottom:5px;" })
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

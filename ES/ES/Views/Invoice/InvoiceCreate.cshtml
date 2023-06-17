@@ -1,0 +1,413 @@
+﻿@model ES.Models.InvoiceVM
+
+
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="icon" type="image/svg" href="~/assets/Ireshalogo.svg">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link href="/assetsnew/css/material-kit.css?v=2.0.4" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <link href="./assetsnew/css/material-kit.css?v=2.0.4" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .f {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        
+    </style>
+</head>
+
+
+
+<div class="main-raised" style="background-color:white">
+    <br />
+    <h1 class="f">NEW ORDER</h1>
+    <br><br>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+        <div class="row" style="margin-left:100px; margin-right:-100px;">
+            <div class="col-lg" style="margin-left:100px; margin-right:-100px;">
+                @Html.EditorFor(model => model.OrderId, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Order ID" } })
+                @Html.ValidationMessageFor(model => model.OrderId, "", new { @class = "text-danger" })
+            </div>
+            <div class="col" style="margin-left:-80px;">
+                @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Customer Name" } })
+                @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br /><br />
+        <div class="row" style="margin-left:100px; margin-right:-100px;">
+            <div class="col" style="margin-left:100px; margin-right:-100px;">
+                @Html.EditorFor(model => model.CustomerAddress, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Address" } })
+                @Html.ValidationMessageFor(model => model.CustomerAddress, "", new { @class = "text-danger" })
+            </div>
+            <div class="col" style="margin-left:-80px;">
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Contact No" } })
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="col-lg" style="margin-left:200px;">
+            @Html.EditorFor(model => model.OrderDate, new { htmlAttributes = new { @class = "form-control", @type = "date", @id = "OrderDate", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.OrderDate, "", new { @class = "text-danger" })
+        </div>
+        <br />
+        <br>
+        <hr style="border-color:darkgrey; width: 50%;">
+        <div>
+            <button id="show-links" class="btn btn-secondary" style="font-size:10px;">
+                Add Cart&nbsp;&nbsp;
+                <i class="fas fa-plus"></i>
+            </button>
+            <ul id="nav-links" class="nav justify-content-center" style="background-color:aliceblue; margin-left: 100px; margin-right: 100px; ">
+                <li class="nav-item" style="font-size:15px;">
+                    <a class="nav-link active" href="#c1" data-toggle="tab">Cart 01</a>
+                </li>
+                <li class="nav-item" style="font-size:15px; display:none;" id="updates-li">
+                    <a class="nav-link" href="#c2" data-toggle="tab">Cart 02</a>
+                </li>
+                <li class="nav-item" style="font-size:15px; display:none;" id="history-li">
+                    <a class="nav-link" href="#c3" data-toggle="tab">Cart 03</a>
+                </li>
+                <li class="nav-item" style="font-size:15px; display:none;" id="history-li">
+                    <a class="nav-link" href="#c4" data-toggle="tab">Cart 04</a>
+                </li>
+                <li class="nav-item" style="font-size:15px; display:none;" id="history-li">
+                    <a class="nav-link" href="#c5" data-toggle="tab">Cart 05</a>
+                </li>
+                <li class="nav-item" style="font-size:15px; display:none;" id="history-li">
+                    <a class="nav-link" href="#c6" data-toggle="tab">Cart 06</a>
+                </li>
+            </ul>
+            <br /><br />
+            <div class="tab-content justify-content-center">
+                <div class="tab-pane active" id="c1">
+                    <div class="justify-content-center" style="margin-left:432px;">
+                        <label for="" style="margin-left:-600px; font-size:15px;">Select Product</label>
+                        @Html.DropDownListFor(model => model.Productname, new SelectList(new List<string> { "",  "Roasted Currry Powder", "Pepper Powder", "Curry Powder", "Chilli Pieces", "Chilli Powder", "Turmeric Powder" }),
+                           new { @class = "form-control", @style = "width: 200px !important; height: 37px !important; font-size: 16px !important;", id = "product-select" })
+                        @Html.ValidationMessageFor(model => model.Productname, "", new { @class = "text-danger" })
+                        <br />
+                        @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Quantity", @style = "width:200px;", @id = "Q" } })
+                        @Html.ValidationMessageFor(model => model.Qty, "", new { @class = "text-danger" })
+                        <br />
+                        @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control", @id = "unitpriceinput1", @type = "text", @placeholder = "Unit Price", @style = "width:200px;" } })
+                        @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
+                        <br />
+                        <label for="result" style="margin-left:-600px; font-size:15px;">Total</label>
+                        <input class="form-control" type="text" id="result" style="width:200px;" readonly>
+                    </div>
+                </div>
+                <div class="tab-pane" id="c2">
+                    <div class="justify-content-center" style="margin-left:432px;">
+                        <label for="" style="margin-left:-600px; font-size:15px;">Select Product</label>
+                        @Html.DropDownListFor(model => model.Productname2, new SelectList(new List<string> { "", "Roasted Currry Powder", "Pepper Powder", "Curry Powder", "Chilli Pieces", "Chilli Powder", "Turmeric Powder" }),
+                           new { @class = "form-control", @style = "width: 200px !important; height: 37px !important; font-size: 16px !important;", id = "product-select" })
+                        @Html.ValidationMessageFor(model => model.Productname2, "", new { @class = "text-danger" })
+                        <br />
+                        @Html.EditorFor(model => model.Qty2, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Quantity", @style = "width:200px;", @id = "Q2" } })
+                        @Html.ValidationMessageFor(model => model.Qty2, "", new { @class = "text-danger" })
+                        <br />
+                        @Html.EditorFor(model => model.UnitPrice2, new { htmlAttributes = new { @class = "form-control", @id = "unitpriceinput2", @type = "text", @placeholder = "Unit Price", @style = "width:200px;" } })
+                        @Html.ValidationMessageFor(model => model.UnitPrice2, "", new { @class = "text-danger" })
+                        <br />
+                        <label for="result2" style="margin-left:-600px; font-size:15px;">Total</label>
+                        <input class="form-control" type="text" id="result2" style="width:200px;" readonly>
+                    </div>
+                </div>
+                <div class="tab-pane" id="c3">
+                    <div class="justify-content-center" style="margin-left:432px;">
+                        <label for="" style="margin-left:-600px; font-size:15px;">Select Product</label>
+                        @Html.DropDownListFor(model => model.Productname3, new SelectList(new List<string> { "", "Roasted Currry Powder", "Pepper Powder", "Curry Powder", "Chilli Pieces", "Chilli Powder", "Turmeric Powder" }),
+                           new { @class = "form-control", @style = "width: 200px !important; height: 37px !important; font-size: 16px !important;", id = "product-select" })
+                        @Html.ValidationMessageFor(model => model.Productname3, "", new { @class = "text-danger" })
+                        <br />
+                        @Html.EditorFor(model => model.Qty3, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Quantity", @style = "width:200px;", @id = "Q3" } })
+                        @Html.ValidationMessageFor(model => model.Qty3, "", new { @class = "text-danger" })
+                        <br />
+                        @Html.EditorFor(model => model.UnitPrice3, new { htmlAttributes = new { @class = "form-control", id = "unitpriceinput3", @type = "text", @placeholder = "Unit Price", @style = "width:200px;" } })
+                        @Html.ValidationMessageFor(model => model.UnitPrice3, "", new { @class = "text-danger" })
+                        <br />
+                        <label for="result3" style="margin-left:-600px; font-size:15px;">Total</label>
+                        <input class="form-control" type="text" id="result3" style="width:200px;" readonly>
+                    </div>
+                </div>
+                <div class="tab-pane" id="c4">
+                    <div class="justify-content-center" style="margin-left:432px;">
+                        <label for="" style="margin-left:-600px; font-size:15px;">Select Product</label>
+                        @Html.DropDownListFor(model => model.Productname4, new SelectList(new List<string> { "", "Roasted Currry Powder", "Pepper Powder", "Curry Powder", "Chilli Pieces", "Chilli Powder", "Turmeric Powder" }),
+                           new { @class = "form-control", @style = "width: 200px !important; height: 37px !important; font-size: 16px !important;", id = "product-select" })
+                        @Html.ValidationMessageFor(model => model.Productname4, "", new { @class = "text-danger" })
+                        <br />
+                        @Html.EditorFor(model => model.Qty4, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Quantity", @style = "width:200px;", @id = "Q4" } })
+                        @Html.ValidationMessageFor(model => model.Qty4, "", new { @class = "text-danger" })
+                        <br />
+                        @Html.EditorFor(model => model.UnitPrice4, new { htmlAttributes = new { @class = "form-control", id = "unitpriceinput4", @type = "text", @placeholder = "Unit Price", @style = "width:200px;" } })
+                        @Html.ValidationMessageFor(model => model.UnitPrice4, "", new { @class = "text-danger" })
+                        <br />
+                        <label for="result4" style="margin-left:-600px; font-size:15px;">Total</label>
+                        <input class="form-control" type="text" id="result4" style="width:200px;" readonly>
+                    </div>
+                </div>
+                <div class="tab-pane" id="c5">
+                    <div class="justify-content-center" style="margin-left:432px;">
+                        <label for="" style="margin-left:-600px; font-size:15px;">Select Product</label>
+                        @Html.DropDownListFor(model => model.Productname5, new SelectList(new List<string> { "", "Roasted Currry Powder", "Pepper Powder", "Curry Powder", "Chilli Pieces", "Chilli Powder", "Turmeric Powder" }),
+                           new { @class = "form-control", @style = "width: 200px !important; height: 37px !important; font-size: 16px !important;", id = "product-select" })
+                        @Html.ValidationMessageFor(model => model.Productname5, "", new { @class = "text-danger" })
+                        <br />
+                        @Html.EditorFor(model => model.Qty5, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Quantity", @style = "width:200px;", @id = "Q5" } })
+                        @Html.ValidationMessageFor(model => model.Qty5, "", new { @class = "text-danger" })
+                        <br />
+                        @Html.EditorFor(model => model.UnitPrice5, new { htmlAttributes = new { @class = "form-control", id = "unitpriceinput5", @type = "text", @placeholder = "Unit Price", @style = "width:200px;" } })
+                        @Html.ValidationMessageFor(model => model.UnitPrice5, "", new { @class = "text-danger" })
+                        <br />
+                        <label for="result5" style="margin-left:-600px; font-size:15px;">Total</label>
+                        <input class="form-control" type="text" id="result5" style="width:200px;" readonly>
+                    </div>
+                </div>
+                <div class="tab-pane" id="c6">
+                    <div class="justify-content-center" style="margin-left:432px;">
+                        <label for="" style="margin-left:-600px; font-size:15px;">Select Product</label>
+                        @Html.DropDownListFor(model => model.Productname6, new SelectList(new List<string> { "", "Roasted Currry Powder", "Pepper Powder", "Curry Powder", "Chilli Pieces", "Chilli Powder", "Turmeric Powder" }),
+                           new { @class = "form-control", @style = "width: 200px !important; height: 37px !important; font-size: 16px !important;", id = "product-select" })
+                        @Html.ValidationMessageFor(model => model.Productname6, "", new { @class = "text-danger" })
+                        <br />
+                        @Html.EditorFor(model => model.Qty6, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Quantity", @style = "width:200px;", @id = "Q6" } })
+                        @Html.ValidationMessageFor(model => model.Qty6, "", new { @class = "text-danger" })
+                        <br />
+                        @Html.EditorFor(model => model.UnitPrice6, new { htmlAttributes = new { @class = "form-control", id = "unitpriceinput6", @type = "text", @placeholder = "Unit Price", @style = "width:200px;" } })
+                        @Html.ValidationMessageFor(model => model.UnitPrice6, "", new { @class = "text-danger" })
+                        <br />
+                        <label for="result6" style="margin-left:-600px; font-size:15px;">Total</label>
+                        <input class="form-control" type="text" id="result6" style="width:200px;" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <hr style="border-color:darkgrey; width: 50%;">
+        <br />
+        <h3 class="text-center f">Total Amount +VAT(15%)</h3>
+        <div class="justify-content-center" style="margin-left:432px;">
+            @Html.EditorFor(model => model.OrderTotal, new { htmlAttributes = new { @class = "form-control", id = "grandtotal",  @style = "width:200px; text-align: center;" } })
+            @Html.ValidationMessageFor(model => model.OrderTotal, "", new { @class = "text-danger" })
+        </div>
+        <br />
+        <br />
+        <div class="form-group">
+            <div class="justify-content-center" style="margin-left:20px;">
+                <input type="submit" value="Save" class="btn btn-success btn-lg" style="color: white;" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="reset" value="Clear" class="btn btn-secondary btn-lg" style="background-color: #F68A09; color:white;" />
+            </div>
+        </div>
+
+    }
+
+    <br />
+</div>
+
+
+
+        <!--   Core JS Files   -->
+        <script src="./assetsnew/js/core/jquery.min.js" type="text/javascript"></script>
+        <script src="./assetsnew/js/core/popper.min.js" type="text/javascript"></script>
+        <script src="./assetsnew/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+        <script src="./assetsnew/js/plugins/moment.min.js"></script>
+        <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+        <script src="./assetsnew/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+        <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+        <script src="./assetsnew/js/plugins/nouislider.min.js" type="text/javascript"></script>
+        <!--	Plugin for Sharrre btn -->
+        <script src="./assetsnew/js/plugins/jquery.sharrre.js" type="text/javascript"></script>
+        <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
+        <script src="./assetsnew/js/material-kit.js?v=2.0.4" type="text/javascript"></script>
+
+        <script>
+            document.getElementById("OrderDate").valueAsDate = new Date();
+        </script>
+
+        <script>
+            // Get the links and store them in an array
+            const links = Array.from(document.querySelectorAll('#nav-links li'));
+
+            // Get the button
+            const showButton = document.querySelector('#show-links');
+
+            // Set a counter to keep track of which link to show next
+            let counter = 1;
+
+            // Add an event listener to the button to show the links one by one
+            showButton.addEventListener('click', () => {
+                // Show the next link
+                links[counter].style.display = 'inline-block';
+                // Increment the counter
+                counter++;
+                // If all links have been shown, disable the button
+                if (counter >= links.length) {
+                    showButton.disabled = true;
+                }
+            })
+            const showLinksButton = document.getElementById('show-links');
+
+
+            showLinksButton.addEventListener('click', function (event) {
+                event.preventDefault(); // prevent form submission
+                // your code to show links goes here
+            });
+            ;
+
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                $('#product-select').prepend('<option value="" selected="selected">Select a product</option>');
+            });
+        </script>
+
+
+        <script>
+            // Retrieve the "Qty" and "UnitPrice" fields
+            var qtyField1 = document.getElementById("Q");
+            var unitPriceField1 = document.getElementById("unitpriceinput1");
+            var qtyField2 = document.getElementById("Q2");
+            var unitPriceField2 = document.getElementById("unitpriceinput2");
+            var qtyField3 = document.getElementById("Q3");
+            var unitPriceField3 = document.getElementById("unitpriceinput3");
+            var qtyField4 = document.getElementById("Q4");
+            var unitPriceField4 = document.getElementById("unitpriceinput4");
+            var qtyField5 = document.getElementById("Q5");
+            var unitPriceField5 = document.getElementById("unitpriceinput5");
+            var qtyField6 = document.getElementById("Q6");
+            var unitPriceField6 = document.getElementById("unitpriceinput6");
+
+            // Add event listeners to detect changes in the fields' values
+            qtyField1.addEventListener("input", calculateTotal1);
+            unitPriceField1.addEventListener("input", calculateTotal1);
+            qtyField2.addEventListener("input", calculateTotal2);
+            unitPriceField2.addEventListener("input", calculateTotal2);
+            qtyField3.addEventListener("input", calculateTotal3);
+            unitPriceField3.addEventListener("input", calculateTotal3);
+            qtyField4.addEventListener("input", calculateTotal4);
+            unitPriceField4.addEventListener("input", calculateTotal4);
+            qtyField5.addEventListener("input", calculateTotal5);
+            unitPriceField5.addEventListener("input", calculateTotal5);
+            qtyField6.addEventListener("input", calculateTotal6);
+            unitPriceField6.addEventListener("input", calculateTotal6);
+
+            // Function to calculate the total and update the "Total" fields
+            function calculateTotal1() {
+                var qty = parseFloat(qtyField1.value);
+                var unitPrice = parseFloat(unitPriceField1.value);
+                var total = qty * unitPrice;
+                if (!isNaN(total)) {
+                    document.getElementById("result").value = total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+                    calculateGrandTotal();
+                }
+            }
+            function calculateTotal2() {
+                var qty = parseFloat(qtyField2.value);
+                var unitPrice = parseFloat(unitPriceField2.value);
+                var total = qty * unitPrice;
+                if (!isNaN(total)) {
+                    document.getElementById("result2").value = total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+                    calculateGrandTotal();
+                }
+            }
+            function calculateTotal3() {
+                var qty = parseFloat(qtyField3.value);
+                var unitPrice = parseFloat(unitPriceField3.value);
+                var total = qty * unitPrice;
+                if (!isNaN(total)) {
+                    document.getElementById("result3").value = total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+                    calculateGrandTotal();
+                }
+            }
+            function calculateTotal4() {
+                var qty = parseFloat(qtyField4.value);
+                var unitPrice = parseFloat(unitPriceField4.value);
+                var total = qty * unitPrice;
+                if (!isNaN(total)) {
+                    document.getElementById("result4").value = total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+                    calculateGrandTotal();
+                }
+            }
+            function calculateTotal5() {
+                var qty = parseFloat(qtyField5.value);
+                var unitPrice = parseFloat(unitPriceField5.value);
+                var total = qty * unitPrice;
+                if (!isNaN(total)) {
+                    document.getElementById("result5").value = total.toFixed(2).replace(/\d(?=(\d{3})+.)/g, '$&,');
+                    calculateGrandTotal();
+                }
+            }
+            function calculateTotal6() {
+                var qty = parseFloat(qtyField6.value);
+                var unitPrice = parseFloat(unitPriceField6.value);
+                var total = qty * unitPrice;
+                if (!isNaN(total)) {
+                    document.getElementById("result6").value = total.toFixed(2).replace(/\d(?=(\d{3})+.)/g, '$&,');
+                    calculateGrandTotal();
+                }
+            }
+
+            function calculateGrandTotal() {
+                var total1 = parseFloat(document.getElementById("result").value.replace(/,/g, ''));
+                var total2 = parseFloat(document.getElementById("result2").value.replace(/,/g, ''));
+                var total3 = parseFloat(document.getElementById("result3").value.replace(/,/g, ''));
+                var total4 = parseFloat(document.getElementById("result4").value.replace(/,/g, ''));
+                var total5 = parseFloat(document.getElementById("result5").value.replace(/,/g, ''));
+                var total6 = parseFloat(document.getElementById("result6").value.replace(/,/g, ''));
+
+                var grandTotal = 0;
+                if (!isNaN(total1)) {
+                    grandTotal += total1;
+                }
+                if (!isNaN(total2)) {
+                    grandTotal += total2;
+                }
+                if (!isNaN(total3)) {
+                    grandTotal += total3;
+                }
+                if (!isNaN(total4)) {
+                    grandTotal += total4;
+                }
+                if (!isNaN(total5)) {
+                    grandTotal += total5;
+                }
+                if (!isNaN(total6)) {
+                    grandTotal += total6;
+                }
+
+                var vat = grandTotal * 0.15; // Calculate VAT
+                var finalValue = grandTotal + vat; // Add VAT to grand total
+                /*document.getElementById("grandtotal").value = finalValue.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');*/
+                document.getElementById("grandtotal").value = finalValue.toFixed(2);
+
+
+            }
+
+
+        </script>
+
+
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

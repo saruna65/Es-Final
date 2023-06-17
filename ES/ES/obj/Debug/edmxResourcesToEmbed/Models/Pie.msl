@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ESModelsDBModelPieStoreContainer" CdmEntityContainer="EntitiesPie">
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="ES.Models.DBModelPie.Product">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Productname" ColumnName="Productname" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="Productname2" ColumnName="Productname2" />
+          <ScalarProperty Name="Qty2" ColumnName="Qty2" />
+          <ScalarProperty Name="UnitPrice2" ColumnName="UnitPrice2" />
+          <ScalarProperty Name="Productname3" ColumnName="Productname3" />
+          <ScalarProperty Name="Qty3" ColumnName="Qty3" />
+          <ScalarProperty Name="UnitPrice3" ColumnName="UnitPrice3" />
+          <ScalarProperty Name="Productname4" ColumnName="Productname4" />
+          <ScalarProperty Name="Qty4" ColumnName="Qty4" />
+          <ScalarProperty Name="UnitPrice4" ColumnName="UnitPrice4" />
+          <ScalarProperty Name="Productname5" ColumnName="Productname5" />
+          <ScalarProperty Name="Qty5" ColumnName="Qty5" />
+          <ScalarProperty Name="UnitPrice5" ColumnName="UnitPrice5" />
+          <ScalarProperty Name="Productname6" ColumnName="Productname6" />
+          <ScalarProperty Name="Qty6" ColumnName="Qty6" />
+          <ScalarProperty Name="UnitPrice6" ColumnName="UnitPrice6" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,70 @@
+﻿@model ES.Models.Login
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bootstrap Template with Card</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <div class="container mt-5">
+        <div class="alert alert-danger" role="alert">
+            Are you want to delete 
+        </div>
+        <div class="card text-center alert-danger">
+            <div class="card-header">
+                <h1>DELETE USER</h1>
+            </div>
+            <div class="card-body text-center">
+                <dl class="dl-horizontal" style="text-align:left;">
+                    <dt>
+                        Name :  @Html.DisplayFor(model => model.Name)
+                    </dt>
+                    <dt><br /></dt>
+                    <dt>
+                        User Name : @Html.DisplayFor(model => model.User_Name)
+                    </dt>
+                    <dt><br /></dt>
+                    <dt>
+                        Password : @Html.DisplayFor(model => model.Password)
+                    </dt>
+                    <dd>
+
+                    </dd>
+                </dl>
+            </div>
+            <div class="card-footer text-muted">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Delete" class="btn btn-outline-danger" /> |
+                        @Html.ActionLink("Back to List", "Index")
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+

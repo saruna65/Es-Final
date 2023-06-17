@@ -1,0 +1,132 @@
+﻿@model IEnumerable<ES.Models.Order>
+
+@{
+    ViewBag.Title = "Index";
+}
+<head>
+    <link href="~/assetsnew/css/material-kit.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .f{
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .thead1 {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+
+</head>
+<h1 class="f" style="margin-top:-50px;">Order Details</h1>
+
+<div class="container">
+    <div class="row">
+
+    </div>
+    <div class="col" style="text-align:right;">
+        <p>
+
+            @Html.ActionLink("Add New Order", "InvoiceCreate", null, new { @class = "btn btn-default", @style = "background-color: #D1B770; color: white; font-size:12px;" })
+
+        </p>
+    </div>
+</div>
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Order" class="form-control w-25">
+<br />
+<div style="height: 450px; overflow: auto">
+    <table class="table" id="myTable" style="width: 100%; height: 100px; text-align: left; font-size: 15px; background-color: white; border-radius: 20px 20px 20px 20px; ">
+        <thead style="position: sticky; top: -1px; z-index: 1; background: #EEE2D1; ">
+            <tr>
+                <th>
+                    <h3 class="title" style="margin-top: 5px; margin-bottom: -5px; font-family: 'Montserrat', sans-serif;">Order Id</h3>
+                </th>
+                <th>
+                    <h3 class="title" style="margin-top: 5px; margin-bottom: -5px; font-family: 'Montserrat', sans-serif;">Customer Name</h3>
+
+                </th>
+                <th>
+                    <h3 class="title" style="margin-top: 5px; margin-bottom: -5px; font-family: 'Montserrat', sans-serif;">Customer Address</h3>
+
+                </th>
+                <th>
+                    <h3 class="title" style="margin-top: 5px; margin-bottom: -5px; font-family: 'Montserrat', sans-serif;">Phone</h3>
+
+                </th>
+                <th>
+                    <h3 class="title" style="margin-top: 5px; margin-bottom: -5px; font-family: 'Montserrat', sans-serif;">Order Placed</h3>
+
+                </th>
+                <th>
+                    <h3 class="title" style="margin-top: 5px; margin-bottom: -5px; font-family: 'Montserrat', sans-serif;">Order Total</h3>
+
+                </th>
+                <th>
+
+
+                </th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderTotal)
+                </td>
+                <td>
+
+
+
+                    @Html.ActionLink("Invoice", "Details", new { OrderId = item.OrderId }, new { @class = "btn btn-sm btn-success", @style = "margin-top:5px; margin-bottom:5px; font-size:12px;" })&nbsp;&nbsp;
+                    @Html.ActionLink("Delete", "Delete", new { OrderId = item.OrderId }, new { @class = "btn btn-sm btn-danger", @style = "margin-top:5px; margin-bottom:5px; font-size:12px;" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<script>
+    function myFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+
+</script>
